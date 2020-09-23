@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mObjects>
+    <mObject name="container-ne">
+	    <section label="identification">
+	    	<attribute name="name"/>
+			<attribute name="ipAddress"/>
+			<attribute name="parent_id"/>
+			<attribute name="productAndRelease"/>
+			<attribute name="activeSoftwareVersionAndRelease"/>
+		</section>
+		<section label="states">
+			<attribute name="connectivityState"/>
+			<attribute name="connectivityDetails"/>
+			<attribute name="supervision"/>
+		</section>
+    </mObject>
+    <mObject name="slot">
+	    <section label="identification">
+            <attribute name="eqptSlotPlannedType"/>
+            <attribute name="eqptSlotActualType"/>
+            <attribute name="eqptBoardInventoryTypeName"/>
+            <attribute name="eqptBoardInventoryFPBACode"/>
+       	</section>
+       	<section label="states">
+            <attribute name="eqptBoardAdminStatus"/>
+            <attribute name="eqptBoardOperStatus"/>
+            <attribute name="eqptBoardAvailStatus"/>
+       	</section>
+    </mObject>
+    <mObject name="pon">
+	    <section label="identification">
+            <attribute name="ifSpeed"/>
+            <attribute name="bponPonConfigAuthMethod"/>
+       	</section>
+       	<section label="states">
+            <attribute name="ifAdminStatus"/>
+            <attribute name="ifOperStatus"/>
+            <attribute name="ifLastChange"/>
+       	</section>
+    </mObject>
+    <mObject name="ont">
+	    <section label="identification">
+	    	<attribute name="name"/>
+            <attribute name="bponOntSerialNumber"/>
+            <attribute name="bponOntLogicalAuthID"/>
+            <attribute name="ontEquippedType"/>
+            <attribute name="ontFamily"/>
+            <attribute name="bponOntEquipId"/>
+            <attribute name="bponOntSwPlannedVersion"/>
+            <attribute name="bponOntVendorId"/>
+       	</section>
+       	<section label="states">
+       		<attribute name="ifAdminStatus"/>
+            <attribute name="ifOperStatus"/>
+            <attribute name="ifLastChange"/>
+       	</section>
+    </mObject>
+</mObjects>

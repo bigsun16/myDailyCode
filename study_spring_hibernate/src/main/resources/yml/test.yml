@@ -1,0 +1,19 @@
+china:
+  ShangHai:
+    key: world.country.china.shangHai
+    value:
+    - puDong: world.country.china.shangHai.puDong
+    - huangPu: world.country.china.shangHai.huangPu
+    - puTuo: world.country.china.shangHai.puTuo
+  HeNan:
+    key: world.country.china.heNan
+    value:
+    - xinXiang: world.country.china.heNan.xinXiang
+    - xinYang: world.country.china.heNan.xinYang
+america:
+  ee: 33
+  dd: 33
+people:
+  qihui:
+    name: qihui
+    age: 28

@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+			http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+			http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+			http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+	<context:property-placeholder location="classpath:conf.properties" />
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+		<property name="jdbcUrl" value="${jdbc.url}" />
+		<property name="driverClass" value="${jdbc.driver}" />
+		<property name="user" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+
+	 	<property name="initialPoolSize" value="${c3p0.initialPoolSize}" />
+		<property name="minPoolSize" value="${c3p0.minPoolSize}" />
+		<property name="maxPoolSize" value="${c3p0.maxPoolSize}" />
+		<property name="maxIdleTime" value="${c3p0.maxIdleTime}" />
+		<property name="acquireIncrement" value="${c3p0.acquireIncrement}" />
+		<property name="idleConnectionTestPeriod" value="${c3p0.idleConnectionTestPeriod}" />
+		<property name="acquireRetryAttempts" value="${c3p0.acquireRetryAttempts}" />
+		<property name="breakAfterAcquireFailure" value="${c3p0.breakAfterAcquireFailure}" />
+		<property name="maxStatements" value="${c3p0.maxStatements}" />
+		<property name="testConnectionOnCheckout" value="${c3p0.testConnectionOnCheckout}" />
+	</bean>
+
+	<bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="annotatedClasses">
+			<list>
+				<value>com.qihui.sun.bean.User</value>
+			</list>
+		</property>
+		<!-- <property name="mappingLocations">
+			<list>
+				<value>com/qihui/sun/bean/User.hbm.xml</value>
+			</list>
+		</property> -->
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">${hibernate.dialect}</prop>
+				<prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
+				<prop key="hibernate.format_sql">${hibernate.format_sql}</prop>
+				<prop key="hibernate.hbm2ddl.auto">${hibernate.hbm2ddl.auto}</prop>
+				<!-- <prop key="hibernate.current_session_context_class">${hibernate.current_session_context_class}</prop> -->
+			</props>
+		</property>
+	</bean>
+	
+	<bean id="yamlService" class="com.qihui.sun.service.YamlServiceImpl">
+	</bean>
+
+	<bean id="hibernateTemplate" class="org.springframework.orm.hibernate5.HibernateTemplate">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<bean id="userDao" class="com.qihui.sun.dao.UserDaoImpl">
+		<property name="hibernateTemplate" ref="hibernateTemplate" />
+	</bean>
+
+	<bean id="userService" class="com.qihui.sun.service.UserServiceImpl">
+		<property name="userDao" ref="userDao" />
+	</bean>
+
+	<bean id="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+		<!-- 
+			isolation:用于指定事务的隔离级别，默认是default，表示使用数据库的默认隔离级别
+			propagation：用于指定事务的传播行为，默认是required，表示一定会有事务，增删改选择，查询一把用supported
+			read-only：默认是false
+			timeout：默认值为-1，表示永不超时，以秒为单位
+			rollback-for:用于指定一个异常，当产生该异常时，事务回滚，其他异常事务不回滚，没有默认值，表示任何异常都回滚
+			no-rollback-for:用于指定一个异常，当产生该异常时，事务不回滚，其他异常事务回滚，没有默认值，表示任何异常都回滚
+		 -->
+			<tx:method name="*" isolation="DEFAULT" propagation="REQUIRED" />
+		</tx:attributes>
+	</tx:advice>
+	
+	<bean id="userServiceLogAspect" class="com.qihui.sun.aspect.UserServiceLogAspect" />
+	
+	<aop:config>
+		<aop:pointcut id="myPointcut" expression="execution(* com.qihui.sun.service.UserService.*(..))"/>
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="myPointcut"/>
+		<aop:aspect ref="userServiceLogAspect">
+			<aop:before method="saveLogBefore" pointcut-ref="myPointcut"/>
+			<aop:after method="saveLogAfter" pointcut-ref="myPointcut"/>
+		</aop:aspect>
+	</aop:config>
+
+	<!-- jms -->
+	<bean id="targetActiveMQConnectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
+		<constructor-arg name="brokerURL" value="tcp://127.0.0.1:61616" />
+	</bean>
+
+	<bean id="connectionFactory" class="org.springframework.jms.connection.SingleConnectionFactory">
+		<constructor-arg name="targetConnectionFactory" ref="targetActiveMQConnectionFactory" />
+	</bean>
+
+	<bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
+		<constructor-arg name="connectionFactory" ref="connectionFactory" />
+	</bean>
+
+	<!--<bean id="destination" class="org.apache.activemq.command.ActiveMQQueue">
+		<constructor-arg name="name" value="spring_queue" />
+	</bean>-->
+
+	<bean id="destination" class="org.apache.activemq.command.ActiveMQTopic">
+		<constructor-arg name="name" value="spring_topic"/>
+	</bean>
+
+	<bean id="jmsMessageListener" class="com.qihui.sun.service.jms.JmsMessageListener" />
+
+	<bean id="jmsQueueProducer" class="com.qihui.sun.service.jms.JmsQueueProducer">
+		<property name="destination" ref="destination"/>
+		<property name="jmsTemplate" ref="jmsTemplate"/>
+	</bean>
+
+	<bean id="jmsTopicProducer" class="com.qihui.sun.service.jms.JmsTopicProducer">
+		<property name="jmsTemplate" ref="jmsTemplate"/>
+		<property name="destination" ref="destination"/>
+	</bean>
+
+	<bean id="jmsListenerContainer" class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+		<property name="connectionFactory" ref="connectionFactory" />
+		<property name="messageListener" ref="jmsMessageListener" />
+		<property name="destination" ref="destination" />
+	</bean>
+</beans> 

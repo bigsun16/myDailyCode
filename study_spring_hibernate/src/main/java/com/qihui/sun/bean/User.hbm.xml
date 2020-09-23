@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.qihui.sun.bean">
+	<class name="User" table="t_user">
+		<id name="id">
+			<generator class="native" />
+		</id>
+		<property name="name" />
+		<property name="gender">
+			<type name="org.hibernate.type.EnumType">
+				<param name="enumClass">com.qihui.sun.bean.Gender</param>
+				<param name="type">12</param>
+			</type>
+		</property>
+		<property name="age" />
+	</class>
+</hibernate-mapping> 

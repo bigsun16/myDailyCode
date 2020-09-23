@@ -1,0 +1,17 @@
+test:
+   languages:
+    - Ruby
+    - Perl
+    - Python 
+   websites:
+    YAML: yaml.org 
+    Ruby: ruby-lang.org 
+    Python: python.org 
+    Perl: use.perl.org 
+   accound: bener
+   passwd: areyouok
+   detials:
+    friends:
+     info: 
+      tel: 11111
+      email: 111100
