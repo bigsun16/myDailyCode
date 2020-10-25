@@ -14,6 +14,12 @@ public class Employee {
         VOCATION
     }
 
+    public Employee(){};
+
+    public Employee(Integer age) {
+        this.age = age;
+    }
+
     public Employee(Integer age, String name, Double salary, Status status) {
         this.age = age;
         this.name = name;
