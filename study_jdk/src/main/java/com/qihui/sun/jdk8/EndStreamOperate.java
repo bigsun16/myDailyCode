@@ -69,6 +69,8 @@ public class EndStreamOperate {
     @Test
     public void test4() {
         Map<Employee.Status, List<Employee>> collect = employees.stream().collect(Collectors.groupingBy(Employee::getStatus));
+        System.out.println(collect);
+
         Map<Boolean, List<Employee>> collect1 = employees.stream().collect(Collectors.partitioningBy((e) -> e.getSalary() > 4000));
 
         String collect2 = employees.stream().map(Employee::getName).collect(Collectors.joining(",", "===", "==="));

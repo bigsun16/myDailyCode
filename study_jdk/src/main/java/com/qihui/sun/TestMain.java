@@ -2,14 +2,21 @@ package com.qihui.sun;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class TestMain {
     public static void main(String[] args) {
-        testGson();
+//        testGson();
+        Map<String,Integer> map = new HashMap<>();
+        System.out.println(map.get("name"));
+        map.put("aa",11);
+        map.put("bb",22);
+        map.put("cc",33);
+        map.put("dd",44);
+
     }
 
     private static void testGson() {
@@ -26,4 +33,77 @@ public class TestMain {
         ArrayList<String> argss = (ArrayList<String>) map1.get("msgargs");
         System.out.println(argss);
     }
+
+    List<Map<String,Object>> values = new ArrayList<Map<String,Object>>(){
+        {
+            add(new HashMap<String,Object>() {{
+                put("sourceFriendlyName", "name1");
+                put("alarmSeverity", "主要");
+            }});
+            add(new HashMap<String,Object>() {{
+                put("sourceFriendlyName", "name2");
+                put("alarmSeverity", "警告");
+            }});
+            add(new HashMap<String,Object>() {{
+                put("sourceFriendlyName", "name3");
+                put("alarmSeverity", "严重");
+            }});
+            add(new HashMap<String,Object>() {{
+                put("sourceFriendlyName", "name1");
+                put("alarmSeverity", "次要");
+            }});
+            add(new HashMap<String,Object>() {{
+                put("sourceFriendlyName", "name2");
+                put("alarmSeverity", "次要");
+            }});
+        }
+    };
+
+    @Test
+    public void testMap(){
+        Map<String, List<Map<String, Object>>> collect = values.stream().
+                collect(Collectors.groupingBy((map) -> String.valueOf(map.get("sourceFriendlyName"))));
+        System.out.println(collect);
+        System.out.println("=====================");
+        Map<String,String> result = new HashMap<>();
+        collect.forEach((key,value)->{
+            boolean critical = value.stream().anyMatch((map) -> map.get("alarmSeverity").equals("严重"));
+            boolean major = value.stream().anyMatch((map) -> map.get("alarmSeverity").equals("主要"));
+            boolean minor = value.stream().anyMatch((map) -> map.get("alarmSeverity").equals("次要"));
+            boolean warning = value.stream().anyMatch((map) -> map.get("alarmSeverity").equals("警告"));
+            boolean indeterminate = value.stream().anyMatch((map) -> map.get("alarmSeverity").equals("提示"));
+            if (critical){
+                result.put(key,"Critical");
+            } else if (major){
+                result.put(key,"Major");
+            } else if (minor){
+                result.put(key,"Minor");
+            } else if (warning){
+                result.put(key,"Warning");
+            } else if (indeterminate){
+                result.put(key,"Indeterminate");
+            }
+        });
+        System.out.println(result);
+    }
+
+    @Test
+    public void testMap2(){
+        Map<String,String> map = new HashMap<String,String>(){
+            {
+                put("11","aa");
+                put("22","bb");
+                put("33","cc");
+                put("44","dd");
+            }
+        };
+        System.out.println(map);
+        map.forEach((key,value)->{
+            if (key.equals("22") && value.equals("bb")){
+                map.put(key,"haha");
+            }
+        });
+        System.out.println(map);
+    }
+
 }
