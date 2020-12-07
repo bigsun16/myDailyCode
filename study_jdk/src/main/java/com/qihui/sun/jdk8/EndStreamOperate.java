@@ -6,13 +6,18 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import javax.sound.midi.Soundbank;
+
 public class EndStreamOperate {
     List<Employee> employees = Arrays.asList(
-            new Employee(18, "Zhang San", 5555.5D, Employee.Status.BUSY),
-            new Employee(15, "li Si", 4444.4D, Employee.Status.FREE),
-            new Employee(19, "Wang Wu", 6666.6D, Employee.Status.VOCATION),
-            new Employee(22, "Ma Liu", 7777.7D, Employee.Status.FREE),
-            new Employee(22, "Ma Liu", 7777.7D, Employee.Status.BUSY)
+            new Employee(15, "Zhang San", 5555.5D, Employee.Status.BUSY),
+            new Employee(33, "Li Si", 4444.4D, Employee.Status.FREE),
+            new Employee(18, "Zhang San", 56655.5D, Employee.Status.BUSY),
+            new Employee(23, "Li Si", 4454.4D, Employee.Status.FREE),
+            new Employee(12, "Zhang San", 5155.5D, Employee.Status.BUSY),
+            new Employee(36, "Li Si", 4344.4D, Employee.Status.FREE),
+            new Employee(11, "Zhang San", 55755.5D, Employee.Status.BUSY),
+            new Employee(15, "Li Si", 4466.4D, Employee.Status.FREE)
     );
 
     @Test
@@ -68,7 +73,7 @@ public class EndStreamOperate {
 
     @Test
     public void test4() {
-        Map<Employee.Status, List<Employee>> collect = employees.stream().collect(Collectors.groupingBy(Employee::getStatus));
+        Map<Integer, List<Employee>> collect = employees.stream().collect(Collectors.groupingBy(Employee::getAge));
         System.out.println(collect);
 
         Map<Boolean, List<Employee>> collect1 = employees.stream().collect(Collectors.partitioningBy((e) -> e.getSalary() > 4000));
@@ -77,6 +82,46 @@ public class EndStreamOperate {
         System.out.println(collect2);
 
         Optional<Integer> reduce = employees.stream().map((x) -> 1).reduce(Integer::sum);
+    }
+
+    @Test
+    public void test5(){
+        Map<String, List<Employee>> collect = employees.stream().collect(Collectors.groupingBy(Employee::getName));
+
+        collect.forEach((key,value)->{
+            LinkedHashMap<Integer, Double> collect1 = value.stream().sorted((o1, o2) -> o2.getAge().compareTo(o1.getAge())).collect(Collectors.toMap(Employee::getAge, Employee::getSalary, (oldVal, newVal) -> oldVal,
+                    LinkedHashMap::new));
+            /*LinkedHashMap<Integer, Double> collect2 = collect1.entrySet().stream().sorted((o1, o2) -> {
+                return o1.getKey().compareTo(o2.getKey());
+            }).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (oldVal, newVal) -> oldVal,
+                    LinkedHashMap::new));*/
+            System.out.println(collect1);
+            System.out.println(collect1.keySet());
+        });
+    }
+
+    @Test
+    public void test6(){
+    	Map<String,Object> map1 = new HashMap<String, Object>();
+    	map1.put("aa", 11);
+    	map1.put("bb", 22);
+    	map1.put("cc", 33);
+    	Map<String,Object> map2 = new HashMap<String, Object>();
+    	map2.put("dd", 44);
+    	map1.entrySet().iterator();
+    	System.out.println(map1);
+    	LinkedHashMap<String, Object> map = new LinkedHashMap<>();
+    }
+
+    @Test
+    public void test7(){
+        List<String> list = Arrays.asList("a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z",
+                "A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z",
+                "0","1","2","3","4","5","6","7","8","9",
+                "!","@","#","&",".");
+        Collections.shuffle(list);
+        List<String> strings = list.subList(0, 13);
+        strings.forEach(System.out::print);
     }
 
 }

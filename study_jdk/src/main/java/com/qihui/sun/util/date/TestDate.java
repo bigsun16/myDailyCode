@@ -1,5 +1,7 @@
 package com.qihui.sun.util.date;
 
+import org.junit.Test;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -21,6 +23,7 @@ public class TestDate {
          */
         String pattern = "yyyy年MM月dd日HH时mm分ss秒";
         SimpleDateFormat sdf = new SimpleDateFormat(pattern);
+
         String formatDate = sdf.format(nowDate);
         System.out.println(formatDate);
         System.out.println("================");
@@ -29,5 +32,13 @@ public class TestDate {
 
 
 
+    }
+
+    @Test
+    private void testTime () throws ParseException {
+        String pattern = "yyyy-MM-dd HH:mm:ss";
+        SimpleDateFormat sdf = new SimpleDateFormat(pattern);
+        Date parse = sdf.parse("2020-12-1 12:12:12");
+        System.out.println(parse.getTime());
     }
 }

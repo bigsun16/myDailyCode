@@ -106,4 +106,12 @@ public class TestMain {
         System.out.println(map);
     }
 
+    @Test
+    public void testMap3(){
+        Map<String, String> dedicatedNetName = Collections.singletonMap("dedicatedNetName", "");
+        System.out.println(dedicatedNetName);
+        Map<String,Object> map = new HashMap<>();
+        map.put("dedicatedNetName","");
+        System.out.println(map);
+    }
 }
