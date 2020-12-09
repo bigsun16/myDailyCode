@@ -37,20 +37,27 @@ public class ForkJoinCalculate extends RecursiveTask<Long> {
     }
 
     public static void main(String[] args) {
-        Instant start = Instant.now();
+        /*Instant start = Instant.now();
         ForkJoinCalculate task = new ForkJoinCalculate(0L,100000000000L);
         ForkJoinPool pool = new ForkJoinPool();
         Long invoke = pool.invoke(task);
         System.out.println(invoke);
         Instant end = Instant.now();
         System.out.println(Duration.between(start, end).toMillis());
-        System.out.println("------------------------------");
+        System.out.println("------------------------------");//9825
         Instant start2 = Instant.now();
-        long sum = 0L;
-//        long asLong = LongStream.range(0, 100000000000L).parallel().reduce(Long::sum).getAsLong();
+//        long asLong = LongStream.range(0, 1000000000L).parallel().reduce(Long::sum).getAsLong();
         long reduce = LongStream.rangeClosed(0, 100000000000L).parallel().reduce(0, Long::sum);
         System.out.println(reduce);
         Instant end2 = Instant.now();
-        System.out.println(Duration.between(start2, end2).toMillis());
+        System.out.println(Duration.between(start2, end2).toMillis());//6561
+        System.out.println("------------------------------");*/
+        Instant start3 = Instant.now();
+        Long sum3 = 0L;
+        for (long i = 0; i < 100000000000L; i++) {
+            sum3+=i;
+        }
+        Instant end3 = Instant.now();
+        System.out.println(Duration.between(start3, end3).toMillis());//230247
     }
 }
