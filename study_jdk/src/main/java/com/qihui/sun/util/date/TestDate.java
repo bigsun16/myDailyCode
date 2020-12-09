@@ -1,6 +1,8 @@
 package com.qihui.sun.util.date;
 
-import org.junit.Test;
+
+
+import org.junit.jupiter.api.Test;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -35,7 +37,7 @@ public class TestDate {
     }
 
     @Test
-    private void testTime () throws ParseException {
+    public void testTime () throws ParseException {
         String pattern = "yyyy-MM-dd HH:mm:ss";
         SimpleDateFormat sdf = new SimpleDateFormat(pattern);
         Date parse = sdf.parse("2020-12-1 12:12:12");

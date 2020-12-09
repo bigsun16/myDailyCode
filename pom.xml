@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.qihui.cun</groupId>
+    <groupId>com.qihui.sun</groupId>
     <artifactId>myDailyCode</artifactId>
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
@@ -12,17 +12,19 @@
         <module>study_spring_hibernate</module>
         <module>study_jdk</module>
         <module>study_design_patterns</module>
+        <module>security_springMvc</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <spring_version>4.3.20.RELEASE</spring_version>
+        <spring_version>5.1.15.RELEASE</spring_version>
+<!--        <spring_version>4.3.20.RELEASE</spring_version>-->
         <hibernate_version>5.3.7.Final</hibernate_version>
         <log4j_version>2.12.1</log4j_version>
         <mysql_version>8.0.19</mysql_version>
         <c3p0_version>0.9.1.2</c3p0_version>
         <aspectj_version>1.9.5</aspectj_version>
         <commonIO_version>2.6</commonIO_version>
-        <junit_version>4.13</junit_version>
+        <junit_version>5.1.1</junit_version>
         <snakeyaml_version>1.26</snakeyaml_version>
         <gson_version>2.5</gson_version>
         <jackson_version>2.11.1</jackson_version>
@@ -61,9 +63,19 @@
                 <artifactId>activemq-spring</artifactId>
                 <version>${activemq-core}</version>
             </dependency>-->
-            <dependency>
+            <!--<dependency>
                 <groupId>org.apache.activemq</groupId>
                 <artifactId>activemq-client</artifactId>
+                <version>${activemq-core}</version>
+            </dependency>-->
+            <dependency>
+                <groupId>org.apache.activemq</groupId>
+                <artifactId>activemq-all</artifactId>
+                <version>${activemq-core}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.activemq</groupId>
+                <artifactId>activemq-pool</artifactId>
                 <version>${activemq-core}</version>
             </dependency>
 
@@ -101,11 +113,17 @@
                 <version>${gson_version}</version>
             </dependency>
 
-            <dependency>
+           <!-- <dependency>
                 <groupId>junit</groupId>
                 <artifactId>junit</artifactId>
                 <version>${junit_version}</version>
+            </dependency>-->
+            <dependency>
+                <groupId>org.junit.jupiter</groupId>
+                <artifactId>junit-jupiter-api</artifactId>
+                <version>${junit_version}</version>
             </dependency>
+
 
             <dependency>
                 <groupId>org.aspectj</groupId>
@@ -133,6 +151,11 @@
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-orm</artifactId>
+                <version>${spring_version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-webmvc</artifactId>
                 <version>${spring_version}</version>
             </dependency>
             <dependency>

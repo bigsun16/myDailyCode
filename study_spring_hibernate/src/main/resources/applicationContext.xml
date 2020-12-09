@@ -96,16 +96,29 @@
 	</aop:config>
 
 	<!-- jms -->
-	<bean id="targetActiveMQConnectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
+	<!--<bean id="targetActiveMQConnectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
 		<constructor-arg name="brokerURL" value="tcp://127.0.0.1:61616" />
-	</bean>
+	</bean>-->
 
-	<bean id="connectionFactory" class="org.springframework.jms.connection.SingleConnectionFactory">
+	<!--<bean id="connectionFactory" class="org.springframework.jms.connection.SingleConnectionFactory">
 		<constructor-arg name="targetConnectionFactory" ref="targetActiveMQConnectionFactory" />
+	</bean>-->
+	<bean id="jmsFactory"
+		  class="org.apache.activemq.pool.PooledConnectionFactory"
+		  destroy-method="stop">
+		<property name="connectionFactory">
+			<!--<bean class="org.apache.activemq.ActiveMQConnectionFactory">
+				<property name="brokerURL" value="tcp://127.0.0.1:61616"/>
+			</bean>-->
+			<bean class="org.apache.activemq.ActiveMQConnectionFactory">
+				<constructor-arg name="brokerURL" value="tcp://127.0.0.1:61616" />
+			</bean>
+		</property>
+		<property name="maxConnections" value="100"></property>
 	</bean>
 
 	<bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
-		<constructor-arg name="connectionFactory" ref="connectionFactory" />
+		<constructor-arg name="connectionFactory" ref="jmsFactory" />
 	</bean>
 
 	<!--<bean id="destination" class="org.apache.activemq.command.ActiveMQQueue">
@@ -129,7 +142,7 @@
 	</bean>
 
 	<bean id="jmsListenerContainer" class="org.springframework.jms.listener.DefaultMessageListenerContainer">
-		<property name="connectionFactory" ref="connectionFactory" />
+		<property name="connectionFactory" ref="jmsFactory" />
 		<property name="messageListener" ref="jmsMessageListener" />
 		<property name="destination" ref="destination" />
 	</bean>

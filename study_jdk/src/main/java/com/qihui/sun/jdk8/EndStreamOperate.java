@@ -1,12 +1,10 @@
 package com.qihui.sun.jdk8;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-
-import javax.sound.midi.Soundbank;
 
 public class EndStreamOperate {
     List<Employee> employees = Arrays.asList(

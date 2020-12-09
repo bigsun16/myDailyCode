@@ -2,7 +2,7 @@ package com.qihui.sun;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.*;
 import java.util.stream.Collectors;

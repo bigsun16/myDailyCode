@@ -2,21 +2,21 @@ package com.qihui.sun.service;
 
 import com.qihui.sun.bean.Gender;
 import com.qihui.sun.bean.User;
-import com.qihui.sun.service.UserService;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@RunWith(SpringJUnit4ClassRunner.class) // 使用junit4进行测试
-@ContextConfiguration(locations = "classpath:applicationContext.xml")
+//@RunWith(SpringJUnit4ClassRunner.class) // 使用junit4进行测试
+@ExtendWith(SpringExtension.class)
+@ContextConfiguration("classpath:applicationContext.xml")
 public class UserServiceTest {
 
 	@Autowired
