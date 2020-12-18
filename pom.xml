@@ -13,10 +13,11 @@
         <module>study_jdk</module>
         <module>study_design_patterns</module>
         <module>security_springMvc</module>
+        <module>security_springSecurity</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <spring_version>5.1.15.RELEASE</spring_version>
+        <spring_version>5.1.4.RELEASE</spring_version>
 <!--        <spring_version>4.3.20.RELEASE</spring_version>-->
         <hibernate_version>5.3.7.Final</hibernate_version>
         <log4j_version>2.12.1</log4j_version>
@@ -36,11 +37,19 @@
         <cglib_version>3.3.0</cglib_version>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-
     </properties>
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>org.springframework.security</groupId>
+                <artifactId>spring-security-web</artifactId>
+                <version>${spring_version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.security</groupId>
+                <artifactId>spring-security-config</artifactId>
+                <version>${spring_version}</version>
+            </dependency>
             <dependency>
                 <groupId>cglib</groupId>
                 <artifactId>cglib</artifactId>

@@ -6,7 +6,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 @Service
 public class AuthenticationServiceImpl implements AuthenticationService{
@@ -31,10 +33,14 @@ public class AuthenticationServiceImpl implements AuthenticationService{
         return userMap.get(name);
     }
 
-    private Map<String,User> userMap = new HashMap<String,User>(){
-        {
-            put("zhang san",new User("1","zhang san","123","张三","123456"));
-            put("li si",new User("2","li si","123","李四","1234567"));
-        }
-    };
+    private Map<String,User> userMap = new HashMap<String,User>();
+    {
+        Set<String> authorities1 = new HashSet<>();
+        authorities1.add("p1");
+        Set<String> authorities2 = new HashSet<>();
+        authorities2.add("p2");
+        userMap.put("zhang san",new User("1","zhang san","123","张三","123456",authorities1));
+        userMap.put("li si",new User("2","li si","123","李四","1234567",authorities2));
+    }
+
 }
