@@ -14,6 +14,7 @@
         <module>study_design_patterns</module>
         <module>security_springMvc</module>
         <module>security_springSecurity</module>
+        <module>study_mybatis</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -21,6 +22,7 @@
 <!--        <spring_version>4.3.20.RELEASE</spring_version>-->
         <hibernate_version>5.3.7.Final</hibernate_version>
         <log4j_version>2.12.1</log4j_version>
+        <mybatis_version>3.5.1</mybatis_version>
         <mysql_version>8.0.19</mysql_version>
         <c3p0_version>0.9.1.2</c3p0_version>
         <aspectj_version>1.9.5</aspectj_version>
@@ -193,9 +195,33 @@
                 <artifactId>log4j-core</artifactId>
                 <version>${log4j_version}</version>
             </dependency>
+
+            <dependency>
+                <groupId>org.mybatis</groupId>
+                <artifactId>mybatis</artifactId>
+                <version>${mybatis_version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
     <build>
+        <resources>
+            <resource>
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>**/*.xml</include>
+                    <include>**/*.properties</include>
+                </includes>
+                <filtering>true</filtering>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>**/*.xml</include>
+                    <include>**/*.properties</include>
+                </includes>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
