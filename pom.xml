@@ -21,7 +21,7 @@
         <spring_version>5.1.4.RELEASE</spring_version>
 <!--        <spring_version>4.3.20.RELEASE</spring_version>-->
         <hibernate_version>5.3.7.Final</hibernate_version>
-        <log4j_version>2.12.1</log4j_version>
+        <log4j_version>1.2.17</log4j_version>
         <mybatis_version>3.5.1</mybatis_version>
         <mysql_version>8.0.19</mysql_version>
         <c3p0_version>0.9.1.2</c3p0_version>
@@ -37,6 +37,7 @@
         <jsch_version>0.1.55</jsch_version>
         <activemq-core>5.15.12</activemq-core>
         <cglib_version>3.3.0</cglib_version>
+        <lombok_version>1.18.16</lombok_version>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
@@ -191,8 +192,8 @@
                 <version>${c3p0_version}</version>
             </dependency>
             <dependency>
-                <groupId>org.apache.logging.log4j</groupId>
-                <artifactId>log4j-core</artifactId>
+                <groupId>log4j</groupId>
+                <artifactId>log4j</artifactId>
                 <version>${log4j_version}</version>
             </dependency>
 
@@ -201,6 +202,14 @@
                 <artifactId>mybatis</artifactId>
                 <version>${mybatis_version}</version>
             </dependency>
+            <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok_version}</version>
+                <scope>provided</scope>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
     <build>

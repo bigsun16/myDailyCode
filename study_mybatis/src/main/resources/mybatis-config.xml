@@ -3,18 +3,36 @@
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
+    <properties resource="db.properties"/>
+    <settings>
+        <!--<setting name="logImpl" value="STDOUT_LOGGING"/>-->
+        <setting name="logImpl" value="LOG4J"/>
+    </settings>
+    <typeAliases>
+<!--        <typeAlias type="com.qihui.sun.model.User" alias="User"/>-->
+        <!--加了package后可以直接使用简单类名，大小写均可，建议小写-->
+        <package name="com.qihui.sun.model"/>
+    </typeAliases>
     <environments default="development">
         <environment id="development">
             <transactionManager type="JDBC"/>
             <dataSource type="POOLED">
-                <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
-                <property name="url" value="jdbc:mysql:///qihuis?useUnicode=true&amp;characterEncoding=utf-8&amp;serverTimezone=UTC"/>
-                <property name="username" value="root"/>
-                <property name="password" value="123456"/>
+                <property name="driver" value="${jdbc.driver}"/>
+                <property name="url" value="${jdbc.url}"/>
+                <property name="username" value="${jdbc.username}"/>
+                <property name="password" value="${jdbc.password}"/>
             </dataSource>
         </environment>
     </environments>
     <mappers>
-        <mapper resource="com/qihui/sun/dao/UserMapper.xml"/>
+        <mapper resource="mapper/UserMapper.xml"/>
+
+        <!--下面这种方式需要在pom文件里添加读取配置文件设置-->
+        <!--<mapper resource="com/qihui/sun/dao/UserMapper.xml"/>-->
+
+        <!--下面两种方式xml文件必须跟接口同名且在同意目录下-->
+        <!--<mapper class="com.qihui.sun.dao.UserMapper"/>-->
+        <!--<package name="com.qihui.sun.dao"/>-->
     </mappers>
+
 </configuration>

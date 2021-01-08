@@ -21,6 +21,6 @@ public class MybatisUtil {
     }
 // sqslSession是线程不安全的
     public static SqlSession getSqlSession(){
-        return sqlSessionFactory.openSession();
+        return sqlSessionFactory.openSession(true);
     }
 }
