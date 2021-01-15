@@ -1,7 +1,6 @@
 package com.qihui.sun.countDown;
 
 import java.util.Random;
-import java.util.concurrent.CountDownLatch;
 
 public class CountDownTest {
     private static final Random random = new Random(System.currentTimeMillis());

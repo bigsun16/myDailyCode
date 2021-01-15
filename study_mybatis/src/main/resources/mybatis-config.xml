@@ -26,6 +26,8 @@
     </environments>
     <mappers>
         <mapper resource="mapper/UserMapper.xml"/>
+        <mapper resource="mapper/teacherMapper.xml"/>
+        <mapper resource="mapper/studentMapper.xml"/>
 
         <!--下面这种方式需要在pom文件里添加读取配置文件设置-->
         <!--<mapper resource="com/qihui/sun/dao/UserMapper.xml"/>-->
