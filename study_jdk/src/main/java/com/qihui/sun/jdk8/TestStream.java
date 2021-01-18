@@ -79,13 +79,12 @@ public class TestStream {
 
     @Test
     public void test4(){
-        List<Employee> collect = list.stream()
+        list.stream()
                 .collect(Collectors.groupingBy(Employee::getStatus))
                 .values().stream()
                 .map(employees -> employees.stream()
                         .max(Comparator.comparing(Employee::getSalary))
                         .get()
-                ).collect(Collectors.toList());
-        System.out.println(collect);
+                ).collect(Collectors.toList()).forEach(System.out::println);
     }
 }
