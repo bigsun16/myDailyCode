@@ -1,4 +1,4 @@
-package com.qihui.sun.nio;
+package com.qihui.sun.nio.channel;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
