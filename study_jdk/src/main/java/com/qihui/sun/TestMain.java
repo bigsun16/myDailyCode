@@ -9,14 +9,9 @@ import java.util.stream.Collectors;
 
 public class TestMain {
     public static void main(String[] args) {
-//        testGson();
-        Map<String,Integer> map = new HashMap<>();
-        System.out.println(map.get("name"));
-        map.put("aa",11);
-        map.put("bb",22);
-        map.put("cc",33);
-        map.put("dd",44);
-
+        String value = null;
+        Object value1 = Objects.requireNonNull(value, "value");
+        System.out.println(value1);
     }
 
     private static void testGson() {

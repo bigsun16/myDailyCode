@@ -3,10 +3,7 @@ package com.qihui.sun.jdk8;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -86,5 +83,15 @@ public class TestStream {
                         .max(Comparator.comparing(Employee::getSalary))
                         .get()
                 ).collect(Collectors.toList()).forEach(System.out::println);
+    }
+
+    @Test
+    public void test5(){
+        Set<String> set = new HashSet<>();
+        set.add("45");
+        set.add("23");
+        set.add("78");
+        set.add("14");
+        System.out.println(set);
     }
 }
