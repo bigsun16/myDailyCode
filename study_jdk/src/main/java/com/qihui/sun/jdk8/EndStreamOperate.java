@@ -120,6 +120,7 @@ public class EndStreamOperate {
         Collections.shuffle(list);
         List<String> strings = list.subList(0, 13);
         strings.forEach(System.out::print);
+        //MyWcGquVpB@#4
     }
 
 }
