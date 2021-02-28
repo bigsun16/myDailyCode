@@ -16,6 +16,7 @@
         <module>security_springSecurity</module>
         <module>study_mybatis</module>
         <module>study_netty</module>
+        <module>study_datStructures_algorithm</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
