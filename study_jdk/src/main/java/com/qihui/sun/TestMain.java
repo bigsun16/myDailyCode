@@ -5,6 +5,7 @@ import com.google.gson.GsonBuilder;
 import org.junit.jupiter.api.Test;
 
 import java.util.*;
+import java.util.concurrent.FutureTask;
 import java.util.stream.Collectors;
 
 public class TestMain {
@@ -108,5 +109,21 @@ public class TestMain {
         Map<String,Object> map = new HashMap<>();
         map.put("dedicatedNetName","");
         System.out.println(map);
+    }
+
+    @Test
+    public void test4(){
+        Map<String,Object> map = new HashMap<>();
+        map.put("aa","");
+        map.put("bb","");
+        map.put("cc","");
+        HashMap<Object, Object> collect = map.entrySet()
+                .stream()
+                .peek(entry -> entry.setValue(55))
+                .collect(Collectors.toMap(Map.Entry::getKey,
+                        Map.Entry::getValue,
+                        (oldVal, newVal) -> oldVal,
+                        HashMap::new));
+        System.out.println(collect);
     }
 }
