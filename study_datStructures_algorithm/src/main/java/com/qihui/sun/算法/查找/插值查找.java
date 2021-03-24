@@ -1,32 +1,35 @@
 package com.qihui.sun.算法.查找;
 
 import java.util.Arrays;
+import java.util.Random;
 
 public class 插值查找 {
     public static void main(String[] args) {
         int[] array = new int[100];
         for (int i = 0; i < 100; i++) {
-            array[i] = i + 1;
+            array[i] = new Random().nextInt(100);
         }
         System.out.println(Arrays.toString(array));
-
-        int index = search(array, 0, 99, 55);
+        Arrays.sort(array);
+        System.out.println(Arrays.toString(array));
+        int index = search(array, 0, 99, 58);
         System.out.println(index);
     }
 
-    private static int search(int[] array, int left, int right, int value) {
+    private static int search(int[] array, int leftIndex, int rightIndex, int value) {
         System.out.println("查找次数。。。");
-        if (left > right || value < array[0] || value > array[array.length - 1]) {
+        if (leftIndex > rightIndex || value < array[0] || value > array[array.length - 1]) {
             return -1;
         }
-        int mid = left + (right - left) * (value - array[left]) / (array[right] - array[left]);
-        int midValue = array[mid];
+        int midIndex = leftIndex + (rightIndex - leftIndex) * (value - array[leftIndex]) / (array[rightIndex] - array[leftIndex]);
+        System.out.println(midIndex+"------");
+        int midValue = array[midIndex];
         if (value > midValue) {
-            return search(array, mid + 1, right, value);
+            return search(array, midIndex + 1, rightIndex, value);
         } else if (value < midValue) {
-            return search(array, left, mid - 1, value);
+            return search(array, leftIndex, midIndex - 1, value);
         } else {
-            return mid;
+            return midIndex;
         }
     }
 

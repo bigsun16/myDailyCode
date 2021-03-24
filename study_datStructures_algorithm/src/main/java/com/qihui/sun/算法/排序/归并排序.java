@@ -6,7 +6,8 @@ public class 归并排序 {
     public static void main(String[] args) {
         int[] array = getArray(80000);
 //        int[] array = {8, 4, 5, 7, 1, 3, 6, 2};//merge
-        int[] temp = new int[array.length];//merge
+        //merge
+        int[] temp = new int[array.length];
         System.out.println(Arrays.toString(array));
         long startTime = System.currentTimeMillis();
         mergeSort(array, 0, array.length - 1, temp);
@@ -25,7 +26,8 @@ public class 归并排序 {
     public static void 归并排序(int[] array, int leftIndex, int midIndex, int rightIndex, int[] temp) {
         int i = leftIndex;
         int j = midIndex + 1;
-        int t = 0;//temp[]当前索引
+        //temp[]当前索引
+        int t = 0;
 
         while (i <= midIndex && j <= rightIndex) {
             if (array[i] <= array[j]) {
