@@ -2,13 +2,12 @@ package com.qihui.sun.队列.linked;
 
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.TreeSet;
+import java.lang.reflect.Proxy;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
 
 public class TestMain {
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         MyLinkedQueue linkedQueue1 = new MyLinkedQueue();
 //        双向链表 linkedQueue = new 双向链表();
         linkedQueue1.addLast(1);
@@ -22,7 +21,7 @@ public class TestMain {
         linkedQueue2.printLinked();
 
 
-    }
+    }*/
 
     @Test
     public void test(){
@@ -52,4 +51,38 @@ public class TestMain {
         }*/
 
     }
+
+    @Test
+    public void test2(){
+        System.out.println(Math.round(1.3));
+        System.out.println(Math.round(1.5));
+        System.out.println(Math.round(1.7));
+        System.out.println("---------------");
+        System.out.println(Math.ceil(1.3));
+        System.out.println(Math.ceil(1.5));
+        System.out.println(Math.ceil(1.7));
+        System.out.println("---------------");
+        System.out.println(Math.floor(1.3));
+        System.out.println(Math.floor(1.5));
+        System.out.println(Math.floor(1.7));
+    }
+
+    public static void main(String[] args) {
+        System.out.println(show());
+    }
+
+    private static int show() {
+        int a = 0;
+        try{
+            int b = a/0;
+            a = 3;
+        }catch (Exception e){
+            a = 8;
+            return a;
+        }finally {
+            a = 7;
+        }
+        return a;
+    }
+
 }
