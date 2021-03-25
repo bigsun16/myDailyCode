@@ -15,8 +15,22 @@ public class Interview {
 
     public static void main(String[] args) throws IOException {
 //        test2();
-        System.out.println(14/10);
-        System.out.println(14/10.0);
+        test3();
+    }
+    public static void test3(){
+        Scanner scanner = new Scanner(System.in);
+        while (scanner.hasNext()){
+            int num = scanner.nextInt();
+            for (int i = 0; i < num; i++) {
+                String next = scanner.next();
+                while (next.length()%8!=0){
+                    next = next.concat("0");
+                }
+                for (int i1 = 0; i1 < next.length()/8; i1++) {
+                    System.out.println(next.substring(i1 * 8, i1 * 8 + 8));
+                }
+            }
+        }
     }
     public static void test1() {
         Scanner scanner = new Scanner(System.in);
